@@ -8,15 +8,20 @@ event_predictor is a model that can predict for a new, to be organised, meetup e
 
 ## Installation
 Clone this repo.
-Build the docker image: `docker build `
+Build the docker image: `docker build -t event_predictor:latest .`
+This will take a while when it first runs as it downloads an image with miniconda installed.
 
-## How to start up the score server
-`docker run `
+## How to start up the prediction server
+`docker run -p 80:80 event_predictor python Scorer/Predict.py`
+
+If you run the container more than once you might find that you need to change the port mapping. To get around this you can specify a new port on the host e.g. -p 81:80. You would then need to send prediction requests to this new port.
 
 ## How to use
 POST a request to http://0.0.0.0:80/predict
 The API expects one JSON record per query, e.g.:
-`curl -H "Content-Type: application/json" -X POST -d '{"rsvp_limit":10}' http://127.0.0.1:80/predict`
+`curl -H "Content-Type: application/json" -X POST -d '{"rsvp_limit":10}' http://0.0.0.0:80/predict`
+
 The required field names for each query are:
+* rsvp_limit: The maximum number of YES RSVPs that this event will allow
 
 ## How to change the dataset
