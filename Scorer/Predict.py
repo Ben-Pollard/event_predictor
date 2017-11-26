@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from Exceptions import UnprocessableEntity
 from sklearn.externals import joblib
 import pandas as pd
+from Model import model
 
 app = Flask(__name__)
 
@@ -31,12 +32,18 @@ def predict():
     #Infill dummies
 
     df = pd.DataFrame({k:[v] for k,v in json_.items()})[required_fields]
-    prediction = round(rf.predict(df)[0])
+    prediction = event_predictor.score(json_)
 
     return jsonify({'prediction':prediction})
 
 
 if __name__ == '__main__':
-    rf = joblib.load('Data/rf.pkl')
-    required_fields = joblib.load('Data/required_fields.pkl')
+    scorObj = joblib.load('Data/scoring_objects.pkl')
+    required_fields = scorObj['required_fields']
+    event_predictor = model(scorObj['rfr_search'],
+                            scorObj['memberships_per_group'],
+                            scorObj['maxRsvpLimit'],
+                            scorObj['w2vModel'],
+                            scorObj['vecSize'])
+
     app.run(host='0.0.0.0', port=80)
