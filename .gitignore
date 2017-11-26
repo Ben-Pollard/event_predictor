@@ -102,6 +102,3 @@ ENV/
 
 # Pycharm
 .idea
-
-# Data
-*.json
