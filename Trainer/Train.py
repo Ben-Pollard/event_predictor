@@ -158,7 +158,7 @@ def train(save_to):
     rfr_search = RandomizedSearchCV(rfr, param_distributions=param_dist_rf, n_iter=20)
     rfr_search.fit(X_train, Y_train)
 
-    evaluate(rfr_search.best_estimator_, X_train, X_test, Y_train, Y_test, plots=False)
+    evaluate(rfr_search.best_estimator_, X_train, X_test, Y_train, Y_test)
 
 
     ###Save objects required for scoring
