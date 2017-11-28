@@ -20,7 +20,7 @@ If you run the container more than once you might find that you need to change t
 POST a request to http://0.0.0.0:80/predict
 The API expects one JSON record per query, e.g.:
 
-`curl -H "Content-Type: application/json" -X POST -d '{"created": 1309088803000, "duration": null, "group_id": "INTERNATIONALS-in-Rotterdam", "rsvp_limit": null,  "time": 1310056200000, "topics": ["WCF", "Project Planning", "Leadership", "Software Engineering",   "Enterprise Architecture", "Software Development", ".NET", "IDesign Method", "Windows Azure Platform", "Software Architecture"]}' http://127.0.0.1:80/predict`
+`curl -H "Content-Type: application/json" -X POST -d '{"created": 1309088803000, "duration": null, "group_id": "INTERNATIONALS-in-Rotterdam", "rsvp_limit": null,  "time": 1310056200000, "topics": ["WCF", "Project Planning", "Leadership", "Software Engineering",   "Enterprise Architecture", "Software Development", ".NET", "IDesign Method", "Windows Azure Platform", "Software Architecture"]}' http://0.0.0.0:80/predict`
 
 The required fields for each query are: `['rsvp_limit','duration','time','created','group_id','topics']`. 
 
